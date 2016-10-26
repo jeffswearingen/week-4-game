@@ -144,8 +144,8 @@ function gameStart() {
 			$('#attackButton').on("click", function() {
 			if((heroChosen== true) && (enemyChosen==true)) {
 				console.log($('#hero').data('hp'));
-				$('#hero').data("hp", ($('#hero').data('hp') - $enemy.data('hp')));
-				$('#hero').text($('#hero'.data('hp')));
+				$('#hero').data("hp", ($('#hero').data('hp') - $('#enemy').data('hp')));
+				$('#hero').text($('#hero').data('hp'));
 			}
 		});
 		});
