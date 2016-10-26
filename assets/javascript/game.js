@@ -106,12 +106,27 @@ function gameStart() {
 	$(palpatineHp).text(palpatine.health);
 	$(palpatineBlock).append($(palpatineHp));
 
-	$('.characterToSelect').on('click', function() {
-		$(this).removeClass('.characterToSelect');
-		$(this).addClass('.hero');
-		$('.hero').append(this);
-	});
-};
+	function chooseHero() {
+		$('.characterToSelect').on('click', function() {
+			$(this).removeClass('.characterToSelect');
+			$(this).addClass('.hero');
+			$('.hero').append(this);
+		});
+	}
+
+	function chooseEnemy() {
+		$('.characterToSelect').on('click', function() {
+			$(this).removeClass('.characterToSelect');
+			$(this).addClass('.enemy');
+			$('.enemies').append(this);
+		});
+	}
+
+	chooseHero();
+	chooseEnemy();
+
+	
+}
 
 
 $(document).ready(function() {
