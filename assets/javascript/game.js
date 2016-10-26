@@ -3,6 +3,9 @@ function gameStart() {
 	// character flags
 	var heroChosen = false;
 	var enemyChosen = false;
+	var $hero;
+	var $enemy;
+	var button;
 
 	// define character data
 	obiwan = {
@@ -42,8 +45,9 @@ function gameStart() {
 
 	// Obi-wan
 	var obiwanBlock = $('<div>');
+	$(obiwanBlock).attr('id', 'obiwan');
 	$(obiwanBlock).attr('name', obiwan.name);
-	$(obiwanBlock).data('hp', obiwan.health);
+	$(obiwanBlock).attr('hp', obiwan.health);
 	$(obiwanBlock).addClass('characterToSelect');
 	$(obiwanBlock).text(obiwan.name);
 	$('.characters').append($(obiwanBlock));
@@ -57,7 +61,7 @@ function gameStart() {
 	// Luke
 	var lukeBlock = $('<div>');
 	$(lukeBlock).attr('name', luke.name);
-	$(lukeBlock).data('hp', luke.health);
+	$(lukeBlock).attr('hp', luke.health);
 	$(lukeBlock).addClass('characterToSelect');
 	$(lukeBlock).text(luke.name);
 	$('.characters').append($(lukeBlock));
@@ -71,7 +75,7 @@ function gameStart() {
 	// Mace Windu
 	var winduBlock = $('<div>');
 	$(winduBlock).attr('name', windu.name);
-	$(winduBlock).data('hp', windu.health);
+	$(winduBlock).attr('hp', windu.health);
 	$(winduBlock).addClass('characterToSelect');
 	$(winduBlock).text(windu.name);
 	$('.characters').append($(winduBlock));
@@ -85,7 +89,7 @@ function gameStart() {
 	// Darth Vader
 	var vaderBlock = $('<div>');
 	$(vaderBlock).attr('name', vader.name);
-	$(vaderBlock).data('hp', vader.health);
+	$(vaderBlock).attr('hp', vader.health);
 	$(vaderBlock).addClass('characterToSelect');
 	$(vaderBlock).text(vader.name);
 	$('.characters').append($(vaderBlock));
@@ -99,7 +103,7 @@ function gameStart() {
 	// Emperor Palpatine
 	var palpatineBlock = $('<div>');
 	$(palpatineBlock).attr('name', palpatine.name);
-	$(palpatineBlock).data('hp', palpatine.health);
+	$(palpatineBlock).attr('hp', palpatine.health);
 	$(palpatineBlock).addClass('characterToSelect');
 	$(palpatineBlock).text(palpatine.name);
 	$('.characters').append($(palpatineBlock));
@@ -112,28 +116,36 @@ function gameStart() {
 
 	function chooseCharacter() {
 		$('.characterToSelect').on('click', function() {
+			console.log($hero);
 			if((heroChosen == false) && (enemyChosen == false)) {
 				$(this).addClass('.hero');
-				var $hero = $(this);
+				$hero = $(this);
 				$('.enemies').append($('.characterToSelect'));
 				$('.hero').append(this);
+				console.log($hero);
 			} else if ((heroChosen == true) && (enemyChosen == false)) {
 				$(this).addClass('.enemy');
-				var $enemy = $(this);
+				$enemy = $(this);
 				$('.defender').append(this);
 				enemyChosen = true;
-				var $button = $('<button>');
-				$button.text("Attack");
-				$button.addClass(".buttonClick");
-				$('.fightSection').append($button);
+				button = $('<button>');
+				$(button).text("Attack");
+				$(button).attr('id', 'attackButton');
+				$(button).addClass(".buttonClick");
+				$('.fightSection').append($(button));
 			}
 			heroChosen = true;
 		});
 
-		$('.buttonClick').on('click', function() {
+		$('#attackButton').on('click', function() {
+			console.log("click");
+			alert("click");
+			console.log(heroChosen);
+			console.log(enemyChosen);
 			if((heroChosen== true) && (enemyChosen==true)) {
-				$hero.data("hp", $hero.data("hp") - $enemy.data("hp"));
+				$hero.attr("hp", 1);
 				$hero.text(data-hp);
+				console.log($hero);
 			}
 		});
 	}
