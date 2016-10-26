@@ -56,6 +56,7 @@ function gameStart() {
 	$(obiwanBlock).append($(obiwanImage));
 	var obiwanHp = $('<p>');
 	$(obiwanHp).text(obiwan.health);
+	$(obiwanHp).attr('id', 'health');
 	$(obiwanBlock).append($(obiwanHp));
 
 	// Luke
@@ -70,6 +71,7 @@ function gameStart() {
 	$(lukeBlock).append($(lukeImage));
 	var lukeHp = $('<p>');
 	$(lukeHp).text(luke.health);
+	$(lukeHp).attr('id', 'health');
 	$(lukeBlock).append($(lukeHp));
 
 	// Mace Windu
@@ -84,6 +86,7 @@ function gameStart() {
 	$(winduBlock).append($(winduImage));
 	var winduHp = $('<p>');
 	$(winduHp).text(windu.health);
+	$(winduHp).attr('id', 'health');
 	$(winduBlock).append($(winduHp));
 
 	// Darth Vader
@@ -98,6 +101,7 @@ function gameStart() {
 	$(vaderBlock).append($(vaderImage));
 	var vaderHp = $('<p>');
 	$(vaderHp).text(vader.health);
+	$(vaderHp).attr('id', 'health');
 	$(vaderBlock).append($(vaderHp));
 
 	// Emperor Palpatine
@@ -112,17 +116,17 @@ function gameStart() {
 	$(palpatineBlock).append($(palpatineImage));
 	var palpatineHp = $('<p>');
 	$(palpatineHp).text(palpatine.health);
+	$(palpatineHp).attr('id', 'health');
 	$(palpatineBlock).append($(palpatineHp));
 
 	function chooseCharacter() {
 		$('.characterToSelect').on('click', function() {
-			console.log($hero);
 			if((heroChosen == false) && (enemyChosen == false)) {
 				$(this).addClass('.hero');
+				$(this).attr('id', 'hero');
 				$hero = $(this);
 				$('.enemies').append($('.characterToSelect'));
 				$('.hero').append(this);
-				console.log($hero);
 			} else if ((heroChosen == true) && (enemyChosen == false)) {
 				$(this).addClass('.enemy');
 				$enemy = $(this);
@@ -134,20 +138,19 @@ function gameStart() {
 				$(button).addClass(".buttonClick");
 				$('.fightSection').append($(button));
 			}
+			
 			heroChosen = true;
-		});
 
-		$('#attackButton').on('click', function() {
-			console.log("click");
-			alert("click");
-			console.log(heroChosen);
-			console.log(enemyChosen);
+			$('#attackButton').on("click", function() {
 			if((heroChosen== true) && (enemyChosen==true)) {
-				$hero.attr("hp", 1);
-				$hero.text(data-hp);
-				console.log($hero);
+				console.log($('#hero').data('hp'));
+				$('#hero').data("hp", ($('#hero').data('hp') - $enemy.data('hp')));
+				$('#hero').text($('#hero'.data('hp')));
 			}
 		});
+		});
+
+
 	}
 
 
