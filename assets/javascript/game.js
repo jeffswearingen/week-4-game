@@ -1,5 +1,9 @@
 function gameStart() {
 	
+	// character flags
+	var heroChosen = false;
+	var enemyChosen = false;
+
 	// define character data
 	obiwan = {
 		name: "Obi-Wan",
@@ -106,24 +110,38 @@ function gameStart() {
 	$(palpatineHp).text(palpatine.health);
 	$(palpatineBlock).append($(palpatineHp));
 
-	function chooseHero() {
+	function chooseCharacter() {
 		$('.characterToSelect').on('click', function() {
-			$(this).removeClass('.characterToSelect');
-			$(this).addClass('.hero');
-			$('.hero').append(this);
+			if((heroChosen == false) && (enemyChosen == false)) {
+				$(this).addClass('.hero');
+				var $hero = $(this);
+				$('.enemies').append($('.characterToSelect'));
+				$('.hero').append(this);
+			} else if ((heroChosen == true) && (enemyChosen == false)) {
+				$(this).addClass('.enemy');
+				var $enemy = $(this);
+				$('.defender').append(this);
+				enemyChosen = true;
+				var $button = $('<button>');
+				$button.text("Attack");
+				$button.addClass(".buttonClick");
+				$('.fightSection').append($button);
+			}
+			heroChosen = true;
+		});
+
+		$('.buttonClick').on('click', function() {
+			if((heroChosen== true) && (enemyChosen==true)) {
+				$hero.data("hp", $hero.data("hp") - $enemy.data("hp"));
+				$hero.text(data-hp);
+			}
 		});
 	}
 
-	function chooseEnemy() {
-		$('.characterToSelect').on('click', function() {
-			$(this).removeClass('.characterToSelect');
-			$(this).addClass('.enemy');
-			$('.enemies').append(this);
-		});
-	}
 
-	chooseHero();
-	chooseEnemy();
+
+	chooseCharacter();
+//	chooseEnemy();
 
 	
 }
